@@ -22,7 +22,6 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 id="">Form user</h3>
-                        <h3 id="">Details user</h3>
                         <span class="close">&times;</span>
                     </div>
                     <div class="modal-body">
@@ -43,25 +42,9 @@
                             </div>
                         </form>
 
-                      
-                        <table class="table" id="tableDetails">
-                            <thead>
-                              <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">NAME</th>
-                                <th scope="col">EMAIL</th>
-                                <th scope="col">EMAIL VERIFIED AT</th>
-                                <th scope="col">PASWWORD</th>
-                                <th scope="col">REMEMBER TOKEN</th>
-                                <th scope="col">CREATED AT</th>
-                                <th scope="col">UPDATE AT</th>
-                              </tr>
-                            </thead>
-    
-                        </table> 
+                        <div class="">
 
-
-
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="btnAddorUpdate" class="btn btn-success">
@@ -71,6 +54,48 @@
                 </div>
             </div>
         </div>
+
+
+
+
+        <div id="myModalDetails" class="container modalDetails">
+            <div class="modal-dialog">
+                <div class="modal-contentDetails">
+                    <div class="modal-header">
+                        <h3 id="">Details user</h3>
+                        <span class="closeDetails">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <table class="table" name="tableDetails">
+                            <thead>
+                              <tr>
+                                <th scope="col" >ID</th>
+                                <th scope="col" >
+                                <th scope="col" >EMAIL</th>
+                                <th scope="col" >EMAIL VERIFIED</th>
+                                <th scope="col" >PASSWORD</th>
+                                <th scope="col" >REMEMBER TOKEN</th>
+                                <th scope="col" >CREATED AT</th>
+                                <th scope="col" >UPDATE AT</th>
+                              </tr>
+                            </thead>
+                            <tbody class="tbodydetails">
+                              <td id="idUser"></td>
+                              <td id="nameUSer"></td>
+                              <td id="emailUser"></td>
+                              <td id="emailverified"></td>
+                              <td id="password"></td>
+                              <td id="remembertoken"></td>
+                              <td id="created"></td>
+                              <td id="updated"></td>
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         
         <table class="table" id="table">
             <thead>

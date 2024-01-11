@@ -35,7 +35,7 @@ let result = fetch("https://memin.io/public/api/users")
       let btnDetails = document.createElement("button");
       btnDetails.classList.add("btn", "btn-secondary", "mt-2", "me-3");
       btnDetails.setAttribute('id', 'btn-details');
-      btnDetails.setAttribute('onclick', `detailsUser(${user.id})`);
+      btnDetails.setAttribute('onclick', `openDetails(${user.id})`);
       btnDetails.innerHTML = "Details";
       row.appendChild(btnDetails);
     });
@@ -65,7 +65,7 @@ function addUsers() {
   fetch(url, {
     method: "POST",
     body: JSON.stringify(dates),
-    headers: { "content-type": "application/json" },
+    headers: {"content-type": "application/json" },
   })
   .then((response) => response.json());
 }
@@ -95,14 +95,46 @@ btnAddorUpdate.onclick = addUsers;
 
 
 //details user
-let btnDetails = document.getElementById("btn-details")
+let btnDetails = document.getElementById("btn-details");
+let modalDetails = document.getElementById ('myModalDetails');
 
-function detailsUser(user) {
-   fetch(`https://memin.io/public/api/users/${user.id}`,{
-        method: "GET",
-        headers: {"Content-type" : "application/json"}
-    })
+function openDetails(userid){
+  modalDetails.style.display = 'block'
+  
+  fetch(`https://memin.io/public/api/users/${userid}`,{
+    method: "GET",
+    headers: {"Content-type" : "application/json"}
+  })
     .then(response => response.json())
+    .then(details => {
+      let idUser = document.getElementById('idUser').innerHTML = details.id;
+      console.log(idUser);
+      
+      //idUser.innerText = details.id;
+      
+      //console.log(details);
+    
+    });
 }
 
-  
+
+/* 
+btnDetails.onclick = function () {
+  modalDetails.style.display = 'block'
+}
+
+span.onclick = function (){
+  modalDetails.style.display = 'none'
+}
+
+window.onclick = function (event){
+  if (event.target == modalDetails){
+    modalDetails.style.display = 'none'
+  }
+} */
+
+window.onclick = function (event){
+  if (event.target == modalDetails){
+    modalDetails.style.display = 'none'
+  }
+}
