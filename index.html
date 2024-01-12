@@ -14,9 +14,16 @@
 
 <body>
   <div class="container">
-    <button type="button" id="myBtn" class="btn btn-primary mt-5">
+    <button type="button" id="myBtn" class="btn btn-primary mt-5 mb-3">
       Add or update user
     </button>
+
+    <div class="input-group rounded">
+      <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+      <span class="input-group-text border-0" id="search-addon">
+        <i class="fas fa-search"></i>
+      </span>
+    </div>
 
 
     <div id="myModal" class="modal">
@@ -28,10 +35,17 @@
           </div>
           <div class="modal-body">
             <form name="formUsers" id="formUsers">
-              <div class="form-group">
-                <label for="exampleInputEmail1" class="form-label">Name</label>
-                <input type="text" class="form-control" name="nameUser" id="nameForm" aria-describedby="emailHelp" />
+
+              <div class="form-group" id="idHide">
+                <label for="" class="form-label">Id</label>
+                <input type="text" class="form-control" name="idUser" id="idForm" readonly>
               </div>
+
+              <div class="form-group">
+                <label for="" class="form-label">Name</label>
+                <input type="text" class="form-control" name="nameUser" id="nameForm" />
+              </div>
+
               <div class="form-group">
                 <label class="form-label">Email</label>
                 <input type="email" class="form-control" name="emailUser" id="emailForm" />
@@ -41,6 +55,7 @@
                 <label for="" class="form-label">Password</label>
                 <input type="password" class="form-control" name="passwordUser" id="passwordForm"/>
               </div>
+
             </form>
 
             <div class=""></div>

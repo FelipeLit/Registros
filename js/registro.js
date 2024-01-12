@@ -1,6 +1,9 @@
 let table = document.querySelector("#table");
 let tbody = document.createElement("tbody");
 
+//input hide id
+let idInput = document.getElementById('idHide');
+
 let result = fetch("https://memin.io/public/api/users")
   .then((result) => {
     return result.json();
@@ -53,6 +56,7 @@ let result = fetch("https://memin.io/public/api/users")
 let btnAddorUpdate = document.getElementById("btnAddorUpdate");
 
 function addUsers() {
+
   let nameUser = document.formUsers.nameUser.value;
   let emailUser = document.formUsers.emailUser.value;
   let passwordUser = document.formUsers.passwordUser.value;
@@ -80,19 +84,33 @@ let span = document.getElementsByClassName("close")[0];
 
 btnModalAddUser.onclick = function () {
   modal.style.display = "block";
+  clearData ()
+  idInput.style.display= 'none'
 };
 
 span.onclick = function () {
   modal.style.display = "none";
+  clearData ()
+  idInput.style.display= 'none'
 };
 
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
+    clearData ()
+    idInput.style.display= 'none'
   }
 };
 
 //clear form of add user
+ function clearData (){
+  document.formUsers.idUser.value =''
+  document.formUsers.nameUser.value = ''
+  document.formUsers.emailUser.value = ''
+  document.formUsers.passwordUser.value = ''
+ }
+
+
 //clean's code
 
 btnAddorUpdate.onclick = addUsers;
@@ -151,12 +169,14 @@ function deleteUser(iduser) {
 
 //update user
 //bring information of user
+let idUS = document.getElementById("idForm");
 let nameUS = document.getElementById("nameForm");
 let emailUS = document.getElementById("emailForm");
 let passwordUS = document.getElementById("passwordForm");
 
 function bringDataUser(iduser) {
   modal.style.display = "block";
+  idInput.style.display = 'block'
   
   fetch(`https://memin.io/public/api/users/${iduser}`, {
     method: "GET",
@@ -165,6 +185,7 @@ function bringDataUser(iduser) {
     .then((response) => response.json())
     .then((data) => {
       //console.log(data);
+      idUS.value = data.id;
       nameUS.value = data.name;
       emailUS.value = data.email;
       passwordUS.value = data.password;
@@ -174,31 +195,30 @@ function bringDataUser(iduser) {
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
+    idInput.style.display= 'block';
   }
 };
 
 //update information user
-let btnUpdate = document.getElementById("btn-update");
+let btnUpdate = document.getElementById("btnUpdate");
 
-function updateDataUSer(iduser){
+function updateDataUSer(){
+  let iduser = idUS.value;
 
   let data = {
+    id : idUS.value,
     name: nameUS.value,
     email: emailUS.value,
     password: passwordUS.value,
   };
 
   fetch(`https://memin.io/public/api/users/${iduser}`, {
-
   method: "PUT",
   body: JSON.stringify(data),
   headers: {'Content-Type': 'application/json'}
   })
-  .then (response => console.log(response))
-  .then ((idUSer)=>{
-    id
-  })
+  .then((response) => response.json()(window.location.reload()));
 }
 
-btnUpdate.onclick = updateDataUSer()
+btnUpdate.onclick = updateDataUSer
 
