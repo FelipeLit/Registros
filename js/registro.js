@@ -2,7 +2,7 @@ let table = document.querySelector("#table");
 let tbody = document.createElement("tbody");
 
 //input hide id
-let idInput = document.getElementById('idHide');
+let idInput = document.getElementById("idHide");
 
 let result = fetch("https://memin.io/public/api/users")
   .then((result) => {
@@ -56,7 +56,6 @@ let result = fetch("https://memin.io/public/api/users")
 let btnAddorUpdate = document.getElementById("btnAddorUpdate");
 
 function addUsers() {
-
   let nameUser = document.formUsers.nameUser.value;
   let emailUser = document.formUsers.emailUser.value;
   let passwordUser = document.formUsers.passwordUser.value;
@@ -84,32 +83,31 @@ let span = document.getElementsByClassName("close")[0];
 
 btnModalAddUser.onclick = function () {
   modal.style.display = "block";
-  clearData ()
-  idInput.style.display= 'none'
+  clearData();
+  idInput.style.display = "none";
 };
 
 span.onclick = function () {
   modal.style.display = "none";
-  clearData ()
-  idInput.style.display= 'none'
+  clearData();
+  idInput.style.display = "none";
 };
 
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
-    clearData ()
-    idInput.style.display= 'none'
+    clearData();
+    idInput.style.display = "none";
   }
 };
 
 //clear form of add user
- function clearData (){
-  document.formUsers.idUser.value =''
-  document.formUsers.nameUser.value = ''
-  document.formUsers.emailUser.value = ''
-  document.formUsers.passwordUser.value = ''
- }
-
+function clearData() {
+  document.formUsers.idUser.value = "";
+  document.formUsers.nameUser.value = "";
+  document.formUsers.emailUser.value = "";
+  document.formUsers.passwordUser.value = "";
+}
 
 //clean's code
 
@@ -159,7 +157,7 @@ window.onclick = function (event) {
 let btnDeleteUser = document.getElementById("btn-delete");
 
 function deleteUser(iduser) {
-  if (confirm(`¿Are you sure you want to delete? ${iduser}`)) {
+  if (confirm(`Are you sure you want to delete the user with ID: ${iduser}`)) {
     fetch(`https://memin.io/public/api/users/${iduser}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
@@ -176,8 +174,8 @@ let passwordUS = document.getElementById("passwordForm");
 
 function bringDataUser(iduser) {
   modal.style.display = "block";
-  idInput.style.display = 'block'
-  
+  idInput.style.display = "block";
+
   fetch(`https://memin.io/public/api/users/${iduser}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
@@ -195,30 +193,54 @@ function bringDataUser(iduser) {
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
-    idInput.style.display= 'block';
+    idInput.style.display = "block";
   }
 };
 
 //update information user
 let btnUpdate = document.getElementById("btnUpdate");
 
-function updateDataUSer(){
+function updateDataUSer() {
   let iduser = idUS.value;
 
   let data = {
-    id : idUS.value,
+    id: idUS.value,
     name: nameUS.value,
     email: emailUS.value,
     password: passwordUS.value,
   };
 
   fetch(`https://memin.io/public/api/users/${iduser}`, {
-  method: "PUT",
-  body: JSON.stringify(data),
-  headers: {'Content-Type': 'application/json'}
-  })
-  .then((response) => response.json()(window.location.reload()));
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: { "Content-Type": "application/json" },
+  }).then((response) => response.json()(window.location.reload()));
 }
 
-btnUpdate.onclick = updateDataUSer
+btnUpdate.onclick = updateDataUSer;
 
+//search
+
+let inputSearch = document.getElementById("inputSearch");
+let btnSearch = document.getElementById("btnSearch");
+let divViewRecords = document.createElement("viewRecords");
+
+inputSearch.addEventListener("keyup", (event) => {
+
+  let name = event.target.value;
+  console.log(name);
+
+  fetch(`https://memin.io/public/api/v2/users/search/${name}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+     /*  data.forEach((nameSearch)=>{
+
+       
+      }) */
+      //console.log(data);
+
+    });
+});
