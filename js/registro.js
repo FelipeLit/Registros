@@ -220,15 +220,20 @@ function updateDataUSer() {
 btnUpdate.onclick = updateDataUSer;
 
 //search
-
-let inputSearch = document.getElementById("inputSearch");
 let btnSearch = document.getElementById("btnSearch");
-let divViewRecords = document.createElement("viewRecords");
 
-inputSearch.addEventListener("keyup", (event) => {
+function search() {
 
-  let name = event.target.value;
-  console.log(name);
+  let inputSearch = document.getElementById("inputSearch"); //input
+  let column = document.getElementById("columnSearch"); //div
+
+  column.innerHTML = '';
+  cardBody = document.createElement('div')
+  cardBody.classList.add('card-body')
+  column.appendChild(cardBody)
+
+  let name = inputSearch.value
+  //console.log(name);
 
   fetch(`https://memin.io/public/api/v2/users/search/${name}`, {
     method: "GET",
@@ -236,11 +241,16 @@ inputSearch.addEventListener("keyup", (event) => {
   })
     .then((response) => response.json())
     .then((data) => {
-     /*  data.forEach((nameSearch)=>{
-
-       
-      }) */
-      //console.log(data);
-
+     data.forEach((nameSearch)=>{
+        let names = document.createElement('div')
+        names.innerHTML = nameSearch.name
+        cardBody.appendChild(names) 
+      })
+      
     });
-});
+
+}
+//inputSearch.addEventListener("keyup", (event) => {
+
+
+//});
