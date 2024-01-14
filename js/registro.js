@@ -227,9 +227,11 @@ function search() {
   let inputSearch = document.getElementById("inputSearch"); //input
   let column = document.getElementById("columnSearch"); //div
 
+  column.style.display = 'block'
+
   column.innerHTML = '';
   cardBody = document.createElement('div')
-  cardBody.classList.add('card-body')
+  cardBody.classList.add('card-body', 'hideSearch');
   column.appendChild(cardBody)
 
   let name = inputSearch.value
@@ -248,9 +250,16 @@ function search() {
       })
       
     });
-
+    hideSearch ()
 }
-//inputSearch.addEventListener("keyup", (event) => {
 
+function hideSearch () {
+  let inputSearch = document.getElementById("inputSearch"); //input
+  //let column = document.getElementById("columnSearch"); //div
+  let hideSearch =document.querySelector('.hideSearch')
 
-//});
+  if (inputSearch.value === ''){
+    hideSearch.style.display = 'none'
+  }
+}
+
