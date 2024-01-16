@@ -4,12 +4,26 @@ let tbody = document.createElement("tbody");
 //input hide id
 let idInput = document.getElementById("idHide");
 
-let result = fetch("https://memin.io/public/api/users")
+//pagination ids
+let pagination = document.getElementById("pagination");
+console.log(pagination);
+
+let result = fetch("https://memin.io/public/api/v2/users")
   .then((result) => {
     return result.json();
   })
   .then((data) => {
-    data.forEach((user) => {
+
+    data.links.forEach((link) => {
+      //console.log(data);
+       let pages = document.createElement("a");
+       pages.classList.add("page-item", "me-3");
+       pages.textContent = link.label
+       pagination.appendChild(pages);
+
+    });
+
+    data.data.forEach((user) => {
       let row = document.createElement("tr");
       table.appendChild(row);
 
