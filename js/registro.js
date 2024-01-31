@@ -5,8 +5,8 @@ let tbody = document.createElement("tbody");
 let idInput = document.getElementById("idHide");
 
 //pagination ids
-let pagination = document.getElementById("pagination");
-console.log(pagination);
+/* let pagination = document.getElementById("pagination");
+console.log(pagination); */
 
 let result = fetch("https://memin.io/public/api/v2/users")
   .then((result) => {
@@ -14,14 +14,14 @@ let result = fetch("https://memin.io/public/api/v2/users")
   })
   .then((data) => {
 
-    data.links.forEach((link) => {
+    /* data.links.forEach((link) => {
       //console.log(data);
        let pages = document.createElement("a");
        pages.classList.add("page-item", "me-3");
        pages.textContent = link.label
        pagination.appendChild(pages);
 
-    });
+    }); */
 
     data.data.forEach((user) => {
       let row = document.createElement("tr");
@@ -55,6 +55,8 @@ let result = fetch("https://memin.io/public/api/v2/users")
 
       let btnDetails = document.createElement("button");
       btnDetails.classList.add("btn", "btn-secondary", "mt-2", "me-3");
+      btnDetails.setAttribute('data-bs-toggle', 'modal')
+      btnDetails.setAttribute('data-bs-target', '#DetallesModal')
       btnDetails.setAttribute("id", "btn-details");
       btnDetails.setAttribute("onclick", `openDetails(${user.id})`);
       btnDetails.innerHTML = "Details";
@@ -132,7 +134,7 @@ let btnDetails = document.getElementById("btn-details");
 let modalDetails = document.getElementById("myModalDetails");
 
 function openDetails(userid) {
-  modalDetails.style.display = "block";
+  //modalDetails.style.display = "block";
 
   fetch(`https://memin.io/public/api/users/${userid}`, {
     method: "GET",
@@ -160,12 +162,12 @@ function openDetails(userid) {
     });
 }
 
-window.onclick = function (event) {
+/* window.onclick = function (event) {
   if (event.target == modalDetails) {
     modalDetails.style.display = "none";
   }
 };
-
+ */
 //delete user
 
 let btnDeleteUser = document.getElementById("btn-delete");
